@@ -143,6 +143,7 @@ public class CrimeListFragment extends Fragment {
         }
     }
 
+//    Refresh UI
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();

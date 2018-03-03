@@ -25,14 +25,15 @@ import java.util.UUID;
 
 public class CrimeListFragment extends Fragment {
     private static final String TAG = "CrimeListFragment";
+    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    private static final int REQUEST_CRIME = 1;
+
     private Button mAddCrimeButton;
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
-    private static final int REQUEST_CRIME = 1;
+    private MenuItem newCrimeItem;
     private UUID mChildActivityCrimeId;
     private boolean mSubtitleVisible;
-    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
-    private MenuItem newCrimeItem;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +99,7 @@ public class CrimeListFragment extends Fragment {
         }
 
         newCrimeItem = menu.findItem(R.id.new_crime);
+
         updateMenu();
     }
 
@@ -148,9 +150,10 @@ public class CrimeListFragment extends Fragment {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
         if (crimes.size() == 0) {
-            Toast notice = Toast.makeText(getActivity(), R.string.empty_list, Toast.LENGTH_SHORT);
+            Toast notice = Toast.makeText(getActivity(), R.string.empty_list, Toast.LENGTH_LONG);
             notice.setMargin(-1, 1);
             notice.show();
+            mAddCrimeButton.setVisibility(View.VISIBLE);
         } else {
             mAddCrimeButton.setVisibility(View.GONE);
         }

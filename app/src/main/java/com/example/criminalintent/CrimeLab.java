@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.criminalintent.database.CrimeBaseHelper;
 import com.example.criminalintent.database.CrimeCursorWrapper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,6 +113,11 @@ public class CrimeLab {
 //        mCrimes.remove(crime);
 
         mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + "=?", new String[]{crime.getId().toString()});
+    }
+
+    public File getPhotoFile(Crime crime) {
+        File filesDir = mContext.getFilesDir();
+        return new File(filesDir, crime.getPhotoFilename());
     }
 
     public void updateCrime(Crime crime) {
